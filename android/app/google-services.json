@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "77031990442",
+    "project_id": "gucchhu-58835",
+    "storage_bucket": "gucchhu-58835.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77031990442:android:b070928f9148de5e705cd3",
+        "android_client_info": {
+          "package_name": "com.example.gucchu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77031990442-6tfj6i7eg5jft87tg8naqjeq3e6sfleg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFF6roOI68KAob5ADHp7JUi3N45OcZkGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77031990442-6tfj6i7eg5jft87tg8naqjeq3e6sfleg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "77031990442-cmvqq94dl9dkj69b4napdmat5u3jdmtd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.veterinaryApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77031990442:android:b2308dd345ff81df705cd3",
+        "android_client_info": {
+          "package_name": "com.gucchhu.veterinaryapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77031990442-6tfj6i7eg5jft87tg8naqjeq3e6sfleg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFF6roOI68KAob5ADHp7JUi3N45OcZkGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77031990442-6tfj6i7eg5jft87tg8naqjeq3e6sfleg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "77031990442-cmvqq94dl9dkj69b4napdmat5u3jdmtd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.veterinaryApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
