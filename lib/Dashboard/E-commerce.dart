@@ -1,142 +1,91 @@
 import 'package:flutter/material.dart';
 
-class ECommercePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ECommercePage(),
-    );
-  }
-}
-
-class _ECommercePage extends StatefulWidget {
-  @override
-  _ECommercePageState createState() => _ECommercePageState();
-}
-
-class _ECommercePageState extends State<_ECommercePage> {
-  final List<Product> _products = [
-    Product(
-        name: 'Dog Food',
-        price: 20.0,
-        imageUrl: 'https://via.placeholder.com/150'),
-    Product(
-        name: 'Cat Toy',
-        price: 5.0,
-        imageUrl: 'https://via.placeholder.com/150'),
-    Product(
-        name: 'Bird Cage',
-        price: 50.0,
-        imageUrl: 'https://via.placeholder.com/150'),
-    Product(
-        name: 'Fish Tank',
-        price: 100.0,
-        imageUrl: 'https://via.placeholder.com/150'),
-    Product(
-        name: 'Dog Leash',
-        price: 15.0,
-        imageUrl: 'https://via.placeholder.com/150'),
+class EcommercePage extends StatelessWidget {
+  final List<Map<String, dynamic>> products = [
+    {
+      'name': 'Mat Le Buys',
+      'price': '\$99',
+      'image': 'assets/toy.png',
+    },
+    {
+      'name': 'Natt 9 Feeds',
+      'price': '\$150',
+      'image': 'assets/product2.png',
+    },
+    {
+      'name': 'Light Fancies',
+      'price': '\$200',
+      'image': 'assets/product3.png',
+    },
+    {
+      'name': 'Planet Ma Slad',
+      'price': '\$100',
+      'image': 'assets/product4.png',
+    },
+    // Add more products as needed
   ];
 
-  final List<Product> _cart = [];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pet Products Store'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CartPage(cart: _cart),
-                ),
-              );
-            },
+        title: Text('Pet Supplies'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, // Two items in a row
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            childAspectRatio: 3 / 4, // Adjust the size of each item
           ),
-        ],
-      ),
-      body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 3 / 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
+          itemCount: products.length,
+          itemBuilder: (context, index) {
+            final product = products[index];
+            return Card(
+              elevation: 3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Image.asset(
+                      product['image'],
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text(
+                      product['name'],
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    product['price'],
+                    style: TextStyle(color: Colors.grey[600]),
+                  ),
+                  SizedBox(height: 8),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Handle product purchase
+                    },
+                    child: Text('Buy Now'),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
-        padding: EdgeInsets.all(10),
-        itemCount: _products.length,
-        itemBuilder: (context, index) {
-          final product = _products[index];
-          return Card(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.network(product.imageUrl, height: 80),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(product.name, style: TextStyle(fontSize: 16)),
-                ),
-                Text('\$${product.price}',
-                    style: TextStyle(color: Colors.grey)),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      _cart.add(product);
-                    });
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text('${product.name} added to cart'),
-                    ));
-                  },
-                  child: Text('Add to Cart'),
-                ),
-              ],
-            ),
-          );
-        },
       ),
     );
   }
 }
 
-class CartPage extends StatelessWidget {
-  final List<Product> cart;
-
-  CartPage({required this.cart});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Cart'),
-      ),
-      body: cart.isEmpty
-          ? Center(child: Text('No items in cart'))
-          : ListView.builder(
-              itemCount: cart.length,
-              itemBuilder: (context, index) {
-                final product = cart[index];
-                return ListTile(
-                  leading: Image.network(product.imageUrl),
-                  title: Text(product.name),
-                  subtitle: Text('\$${product.price}'),
-                );
-              },
-            ),
-    );
-  }
-}
-
-class Product {
-  final String name;
-  final double price;
-  final String imageUrl;
-
-  Product({
-    required this.name,
-    required this.price,
-    required this.imageUrl,
-  });
-}
+// void main() {
+//   runApp(MaterialApp(
+//     home: EcommercePage(),
+//   ));
+// }

@@ -5,20 +5,61 @@ class GucchuApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 2,
+        title: Row(
+          children: [
+            Text(
+              'GUCCHU',
+              style: TextStyle(
+                color: Colors.orange,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          SizedBox(width: 10),
+          IconButton(
+            icon: Icon(Icons.person, color: Colors.black),
+            onPressed: () {
+              // Handle profile click
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.shopping_cart, color: Colors.black),
+            onPressed: () {
+              // Handle cart click
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.notifications, color: Colors.black),
+            onPressed: () {
+              // Handle notifications
+            },
+          ),
+          SizedBox(width: 10),
+        ],
+      ),
       body: Stack(
         children: [
+          // Background Image
           Positioned.fill(
             child: Image.asset(
               'assets/pets.jpg', // Replace with your background image
-              fit: BoxFit.cover,
+              fit: BoxFit.cover, // Ensures the image covers the entire screen
               alignment: Alignment.center,
             ),
           ),
+          // Overlay to darken the image
           Positioned.fill(
             child: Container(
               color: Colors.black.withOpacity(0.6), // Semi-transparent overlay
             ),
           ),
+          // Main Content
           SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +88,7 @@ class GucchuApp extends StatelessWidget {
                       ),
                       SizedBox(height: 20),
                       Text(
-                        'Explore our diverse range of tail-wagging companions waiting to fill your home with joy and endless love. Your perfect dog is just a few clicks away!',
+                        'Explore our diverse range of tail-wagging companions waiting to fill your home with joy and endless love.',
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.white60,
@@ -86,7 +127,6 @@ class GucchuApp extends StatelessWidget {
     );
   }
 
-  // Google Sign-In function
   Future<void> _signInWithGoogle() async {
     final GoogleSignIn googleSignIn = GoogleSignIn();
 
@@ -99,11 +139,10 @@ class GucchuApp extends StatelessWidget {
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
 
-      // Here you can get the access token and id token
+      // You can now send these tokens to your backend server for verification
       final String? accessToken = googleAuth.accessToken;
       final String? idToken = googleAuth.idToken;
 
-      // You can now send these tokens to your backend server for verification
       print('Access Token: $accessToken');
       print('ID Token: $idToken');
     } catch (error) {

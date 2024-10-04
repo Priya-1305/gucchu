@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Find_your_gucchu.dart'; // Import the GucchuApp page
-import 'E-commerce.dart';
+import 'E-commerce.dart'; // Import the E-Commerce page
 
 class Navigation_bar extends StatelessWidget {
   @override
@@ -24,10 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Pages corresponding to the sections
   final List<Widget> _pages = [
-    GucchuApp(), // First page now properly linked to GucchuApp
-    Center(child: Text('Vets and Care')),
-    ECommercePage(), // Placeholder for the Vets and Care page
-    // Placeholder for the Food and Accessories page
+    GucchuApp(), // Find Your Gucchu Page
+    Center(child: Text('Vets and Care')), // Placeholder for Vets and Care
+    EcommercePage(), // E-Commerce Page for Food and Accessories
     Center(child: Text('Community')), // Placeholder for the Community page
   ];
 
