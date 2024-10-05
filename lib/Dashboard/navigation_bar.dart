@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'Find_your_gucchu.dart'; // Import the GucchuApp page
-import 'E-commerce.dart'; // Import the E-Commerce page
+import 'E-commerce.dart';
+import 'VetAndCare.dart'; // Import the E-Commerce
+import 'Community.dart';
 
 class Navigation_bar extends StatelessWidget {
   @override
@@ -25,9 +27,11 @@ class _HomeScreenState extends State<HomeScreen> {
   // Pages corresponding to the sections
   final List<Widget> _pages = [
     GucchuApp(), // Find Your Gucchu Page
-    Center(child: Text('Vets and Care')), // Placeholder for Vets and Care
-    EcommercePage(), // E-Commerce Page for Food and Accessories
-    Center(child: Text('Community')), // Placeholder for the Community page
+    VeterinaryCarePage(), // Placeholder for Vets and Care
+    EcommercePage(),
+    CommunityPage(),
+    // E-Commerce Page for Food and Accessories
+    // Placeholder for the Community page
   ];
 
   void _onItemTapped(int index) {
@@ -49,6 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
             alignment: Alignment.bottomCenter,
             child: BottomNavigationBar(
               currentIndex: _currentIndex,
+              unselectedItemColor: Color.fromARGB(255, 231, 169, 146),
               selectedItemColor:
                   Colors.brown, // Highlight the selected item in brown
               onTap: _onItemTapped, // Switch pages on tap

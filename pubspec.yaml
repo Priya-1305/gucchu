@@ -36,6 +36,7 @@ dependencies:
   lottie: ^3.1.2
   firebase_auth: ^5.3.1
   google_sign_in: ^6.2.1
+  cloud_firestore: ^5.4.4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -80,6 +81,15 @@ flutter:
   - assets/pets.jpg
   - assets/pet.jpeg
   - assets/toy.png
+  - assets/picture2.jpg
+  - assets/picture3.jpg
+  - assets/picture4.jpg
+  - assets/Ragdolls.jpg
+  - assets/Food_can_lid.jpg
+  - assets/Food.jpg
+  - assets/dog-food.jpg
+  - assets/cat-pet-barn.jpg
+
   
 
   # An image asset can refer to one or more resolution-specific "variants", see

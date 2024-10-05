@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'Application.dart';
 
 class GucchuApp extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _GucchuAppState extends State<GucchuApp> {
             Text(
               'GUCCHU',
               style: TextStyle(
-                color: Colors.orange,
+                color: Colors.brown,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
@@ -89,7 +90,7 @@ class _GucchuAppState extends State<GucchuApp> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'A HOME for every Dog, a DOG for every home',
+                        'Connecting Pet Lovers with Local Hosts to Find Their Fur Baby',
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.white70,
@@ -190,6 +191,17 @@ class _GucchuAppState extends State<GucchuApp> {
               Text("Name: ${user!.displayName}"),
               Text("Email: ${user!.email}"),
               SizedBox(height: 20),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Application()),
+                    );
+                  },
+                  child: Text('Become the localHost')),
+              SizedBox(
+                height: 20,
+              ),
               ElevatedButton(
                 onPressed: () async {
                   await FirebaseAuth.instance.signOut();
