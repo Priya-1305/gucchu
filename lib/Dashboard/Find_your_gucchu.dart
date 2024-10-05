@@ -98,22 +98,19 @@ class GucchuApp extends StatelessWidget {
 
                       // Add Google Sign-In button
                       ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.brown[300], // Button color
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 15),
-                        ),
-                        onPressed: () async {
-                          await _signInWithGoogle();
-                        },
-                        child: Text(
-                          'SIGN IN WITH GOOGLE',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.brown[300], // Button color
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 15),
                           ),
-                        ),
-                      ),
+                          onPressed: () async {
+                            await _signInWithGoogle();
+                          },
+                          child: ElevatedButton(
+                              onPressed: () {
+                                _signInWithGoogle();
+                              },
+                              child: Text('google'))),
                     ],
                   ),
                 ),
