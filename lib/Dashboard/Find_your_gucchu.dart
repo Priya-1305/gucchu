@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class GucchuApp extends StatelessWidget {
+class GucchuApp extends StatefulWidget {
+  @override
+  _GucchuAppState createState() => _GucchuAppState();
+}
+
+class _GucchuAppState extends State<GucchuApp> {
+  User? user = FirebaseAuth.instance.currentUser;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,12 +30,13 @@ class GucchuApp extends StatelessWidget {
         ),
         actions: [
           SizedBox(width: 10),
-          IconButton(
-            icon: Icon(Icons.person, color: Colors.black),
-            onPressed: () {
-              // Handle profile click
-            },
-          ),
+          if (user != null)
+            IconButton(
+              icon: Icon(Icons.person, color: Colors.black),
+              onPressed: () {
+                _showProfileDialog(); // Display user profile and logout option
+              },
+            ),
           IconButton(
             icon: Icon(Icons.shopping_cart, color: Colors.black),
             onPressed: () {
@@ -96,8 +105,9 @@ class GucchuApp extends StatelessWidget {
                       ),
                       SizedBox(height: 30),
 
-                      // Add Google Sign-In button
-                      ElevatedButton(
+                      // Google Sign-In button
+                      if (user == null)
+                        ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.brown[300], // Button color
                             padding: EdgeInsets.symmetric(
@@ -106,11 +116,18 @@ class GucchuApp extends StatelessWidget {
                           onPressed: () async {
                             await _signInWithGoogle();
                           },
-                          child: ElevatedButton(
-                              onPressed: () {
-                                _signInWithGoogle();
-                              },
-                              child: Text('google'))),
+                          child: Text('Sign in with Google'),
+                        ),
+                      if (user != null)
+                        Center(
+                          child: Text(
+                            "Welcome, ${user?.displayName}!",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
                     ],
                   ),
                 ),
@@ -124,9 +141,9 @@ class GucchuApp extends StatelessWidget {
     );
   }
 
+  // Google Sign-In Method
   Future<void> _signInWithGoogle() async {
     final GoogleSignIn googleSignIn = GoogleSignIn();
-
     try {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
@@ -136,15 +153,58 @@ class GucchuApp extends StatelessWidget {
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
 
-      // You can now send these tokens to your backend server for verification
-      final String? accessToken = googleAuth.accessToken;
-      final String? idToken = googleAuth.idToken;
+      // Authenticate with Firebase
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
 
-      print('Access Token: $accessToken');
-      print('ID Token: $idToken');
+      // Sign in to Firebase with the Google credential
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+
+      setState(() {
+        user = userCredential.user; // Update user after successful sign-in
+      });
+
+      // Show a Snackbar for successful sign-in
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text("Signed in successfully as ${user!.displayName}")),
+      );
     } catch (error) {
-      print(error);
-      // Handle error
+      print('Error signing in with Google: $error');
     }
+  }
+
+  // Show User Profile and Logout option
+  void _showProfileDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("User Profile"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (user != null) ...[
+              Text("Name: ${user!.displayName}"),
+              Text("Email: ${user!.email}"),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut();
+                  GoogleSignIn().signOut();
+                  setState(() {
+                    user = null; // Update state after logging out
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: Text("Logout"),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
   }
 }
