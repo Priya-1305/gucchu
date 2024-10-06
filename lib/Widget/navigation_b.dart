@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'Find_your_gucchu.dart'; // Import the GucchuApp page
-import 'E-commerce.dart';
+import '../Widget/Find_your_gucchu.dart'; // Import the GucchuApp page
+import '../Widget/E-commerce.dart';
 import 'VetAndCare.dart'; // Import the E-Commerce
-import 'Community.dart';
+import '../Widget/Community.dart';
 
 class Navigation_bar extends StatelessWidget {
   @override
@@ -27,9 +27,13 @@ class _HomeScreenState extends State<HomeScreen> {
   // Pages corresponding to the sections
   final List<Widget> _pages = [
     GucchuApp(), // Find Your Gucchu Page
-    VeterinaryCarePage(), // Placeholder for Vets and Care
+    const VeterinaryCarePage(), // Placeholder for Vets and Care
     EcommercePage(),
-    CommunityPage(),
+    const CommunityPage(
+      title: 'Community',
+      description: 'A pet lover community page',
+      sections: [],
+    ),
     // E-Commerce Page for Food and Accessories
     // Placeholder for the Community page
   ];
@@ -57,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
               selectedItemColor:
                   Colors.brown, // Highlight the selected item in brown
               onTap: _onItemTapped, // Switch pages on tap
-              items: [
+              items: const [
                 BottomNavigationBarItem(
                   icon: Icon(Icons.pets),
                   label: 'Find Your Gucchu',

@@ -1,7 +1,9 @@
 import 'dart:async'; // Import for Timer
 import 'package:flutter/material.dart';
+import 'package:gucchu/Widget/navigation_b.dart';
 import 'package:lottie/lottie.dart';
-import 'Dashboard/navigation_bar.dart';
+import 'auth/conditional_routing.dart';
+import 'home.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({super.key});
@@ -18,7 +20,7 @@ class _WelcomeState extends State<Welcome> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => Navigation_bar()), // Navigate to Dashboard
+            builder: (context) => home_Screen()), // Navigate to Dashboard
       );
     });
   }

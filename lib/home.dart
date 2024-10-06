@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'Application.dart';
+import 'package:gucchu/Widget/Application.dart';
+import 'Auth/conditional_routing.dart'; // Import AuthService
 
-class GucchuApp extends StatefulWidget {
+class home_Screen extends StatefulWidget {
   @override
-  _GucchuAppState createState() => _GucchuAppState();
+  _home_Screen createState() => _home_Screen();
 }
 
-class _GucchuAppState extends State<GucchuApp> {
+class _home_Screen extends State<home_Screen> {
   User? user = FirebaseAuth.instance.currentUser;
+  final AuthService authService =
+      AuthService(); // Create instance of AuthService
 
   @override
   Widget build(BuildContext context) {
@@ -173,6 +176,9 @@ class _GucchuAppState extends State<GucchuApp> {
         SnackBar(
             content: Text("Signed in successfully as ${user!.displayName}")),
       );
+
+      // After successful sign-in, call the AuthService to handle navigation
+      authService.handleAuth(context);
     } catch (error) {
       print('Error signing in with Google: $error');
     }
